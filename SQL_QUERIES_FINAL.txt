@@ -1,0 +1,190 @@
+drop table Admin_Login cascade constraints
+
+drop table Exam_Details cascade constraints
+
+drop table User_Details cascade constraints
+
+drop table Questions_Details cascade constraints
+
+drop table Student_Responses cascade constraints
+
+drop table Report_Card cascade constraints
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Select * from Admin_Login
+
+Select * from Exam_Details 
+
+Select * from User_Details
+
+Select * from Questions_Details
+
+Select * from Student_Responses
+
+Select * from Report_Card
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE User_Details (
+   UserID  number(6) NOT NULL,
+   Email   varchar2(25) NOT NULL,
+   Password  varchar2(12) NOT NULL,
+   FullName  varchar2(25) NOT NULL,
+   Mobile    varchar2(10) NOT NULL,	
+   Date_of_Birth  date NOT NULL,
+   City    varchar2(15) NOT NULL,
+   State   varchar2(15) NOT NULL,
+   Qualification varchar2(10) NOT NULL,
+   Year_of_completion   number(4) NOT NULL,
+   constraint UserDetails_UserID_pk primary key(UserID));
+
+INSERT INTO User_Details VALUES (1,'Akash@gmail.com','Akash@123','Akash','9567898979','01-02-1999','Bangalore','Karnataka','B.TECH',2021);
+INSERT INTO User_Details VALUES (2,'Kirk@gmail.com','Kirk@123','Kirk','9345898457','11-03-1999','Mumbai','Maharastra','B.TECH',2021);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------					
+
+CREATE TABLE Admin_Login (
+ Email varchar2(25) NOT NULL,
+ Password varchar2(12) NOT NULL,
+ CONSTRAINT AdminLogin_Email_PK PRIMARY KEY(Email));
+
+INSERT INTO Admin_Login values('akash@gmail.com','akash');
+INSERT INTO Admin_Login values('chandana@gmail.com','chandana');
+INSERT INTO Admin_Login values('kirk@gmail.com','kirk');
+INSERT INTO Admin_Login values('pramod@gmail.com','pramod');
+INSERT INTO Admin_Login values('rishi@gmail.com','rishi');
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE Exam_Details (
+ ExamID number(6) NOT NULL,
+ Exam_Specialization varchar2(10) NOT NULL,
+ Exam_level varchar2(7) NOT NULL,
+ Number_Of_Questions number(3) NOT NULL,
+ Passing_Mark number(3) NOT NULL,
+ Time varchar2(10) NOT NULL,
+ CONSTRAINT ExamDetails_ExamID_primary_key PRIMARY KEY (ExamID));
+
+INSERT INTO Exam_Details values('51','JAVA','LEVEL1',5,3,'60 min');
+INSERT INTO Exam_Details values('52','JAVA','LEVEL2',5,3,'60 min');
+INSERT INTO Exam_Details values('53','JAVA','LEVEL3',5,3,'60 min');
+
+
+INSERT INTO Exam_Details values('54','PYTHON','LEVEL1',5,3,'60 min');
+INSERT INTO Exam_Details values('55','PYTHON','LEVEL2',5,3,'60 min');
+INSERT INTO Exam_Details values('56','PYTHON','LEVEL3',5,3,'60 min');
+
+INSERT INTO Exam_Details values('57','SQL','LEVEL1',5,3,'60 min');
+INSERT INTO Exam_Details values('58','SQL','LEVEL2',5,3,'60 min');
+INSERT INTO Exam_Details values('59','SQL','LEVEL3',5,3,'60 min');
+
+INSERT INTO Exam_Details values('60','C/C++','LEVEL1',5,3,'60 min');
+INSERT INTO Exam_Details values('61','C/C++','LEVEL2',5,3,'60 min');
+INSERT INTO Exam_Details values('62','C/C++','LEVEL3',5,3,'60 min');
+
+INSERT INTO Exam_Details values('63','PHP','LEVEL1',5,3,'60 min');
+INSERT INTO Exam_Details values('64','PHP','LEVEL2',5,3,'60 min');
+INSERT INTO Exam_Details values('65','PHP','LEVEL3',5,3,'60 min');
+
+INSERT INTO Exam_Details values('66','C#/.NET','LEVEL1',5,3,'60 min');
+INSERT INTO Exam_Details values('67','C#/.NET','LEVEL2',5,3,'60 min');
+INSERT INTO Exam_Details values('68','C#/.NET','LEVEL3',5,3,'60 min');
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE Questions_Details(
+ QuestionID NUMBER(6) NOT NULL,
+ Question VARCHAR2(250)NOT NULL,
+ OptionA VARCHAR2(50) NOT NULL,
+ OptionB VARCHAR2(50) NOT NULL,
+ OptionC VARCHAR2(50) NOT NULL,
+ OptionD VARCHAR2(50) NOT NULL,
+ Answer  VARCHAR2(5) NOT NULL,
+ ExamID  NUMBER(6) NOT NULL,
+ CONSTRAINT QUESTDET_QuestionID_PK PRIMARY KEY (QuestionID),
+ CONSTRAINT QUESTDET_ExamID_FK FOREIGN KEY (ExamID) REFERENCES Exam_Details(ExamID) On Delete Cascade);
+
+
+INSERT INTO Questions_Details VALUES(101,'Which of the following is not a Java features?','Dynamic','Architecture Neutral','Use of pointers','Object-oriented','C',51);
+INSERT INTO Questions_Details VALUES(102,'_____ is used to find and fix bugs in the Java programs.','JVM','JRE','JDK','JDB','D',51);
+INSERT INTO Questions_Details VALUES(103,'What do you mean by nameless objects?','An object created by using the new keyword.','An object of a superclass created in the subclass.','An object without having any name but having a reference.','An object that has no reference.','D',51);
+INSERT INTO Questions_Details VALUES(104,'In which memory a String is stored, when we create a string using new operator?','Stack','String memory','Heap memory','Random storage space','C',51);
+INSERT INTO Questions_Details VALUES(105,'Which of these classes are the direct subclasses of the Throwable class?','RuntimeException and Error class','Exception and VirtualMachineError class','Error and Exception class','IOException and VirtualMachineError class','C',51);
+
+INSERT INTO Questions_Details VALUES(106,'Which of the following is a marker interface?','Runnable interface','Readable interface','Result interface','Remote interface','D',52);
+INSERT INTO Questions_Details VALUES(107,'Which of the following is a mutable class in java?','java.lang.String','java.lang.Byte','java.lang.Short','java.lang.StringBuilder','D',52);
+INSERT INTO Questions_Details VALUES(108,'Which of the following is a valid long literal?','ABH8097','L990023',	'904423','0xnf029L','D',52);
+INSERT INTO Questions_Details VALUES(109,'What does the expression float a = 35 / 0 return?','0','Not a Number','Infinity','Run time exception','C',52);
+INSERT INTO Questions_Details VALUES(110,'An interface with no fields or methods is known as a ______.','Runnable Interface','Marker Interface','Abstract Interface','CharSequence Interface','B',52);
+
+INSERT INTO Questions_Details VALUES(111,'Which option is false about the final keyword?','A final method cannot be overridden in its subclasses.','A final class cannot be extended.','A final class cannot extend other classes.','A final method can be inherited.','C',53);
+INSERT INTO Questions_Details VALUES(112,'What is the return type of the hashCode() method in the Object class?','Object','int','long','void','B',53);
+INSERT INTO Questions_Details VALUES(113,'Which of the following is a reserved keyword in Java?','object','strictfp','main','system','B',53);
+INSERT INTO Questions_Details VALUES(114,'In java, jar stands for_____.','Java Archive Runner','Java Application Resource','Java Application Runner','None of the above','D',53);
+INSERT INTO Questions_Details VALUES(115,'What is the use of \w in regex?','Used for a whitespace character','Used for a non-whitespace character','Used for a word character','Used for a non-word character','C',53);
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE Student_Responses(
+ ResponseID NUMBER(6) NOT NULL,
+ UserID NUMBER(6) NOT NULL,
+ QuestionID NUMBER(6) NOT NULL,
+ Response VARCHAR2(7) NOT NULL,
+ Question_Status NUMBER(1) NOT NULL,
+ CONSTRAINT STUDRESP_ResponseID_PK PRIMARY KEY (ResponseID),
+ CONSTRAINT STUDRESP_UserID_FK FOREIGN KEY (UserID) REFERENCES User_Details(UserID) On Delete Cascade,
+ CONSTRAINT STUDRESP_QuestionID_FK FOREIGN KEY (QuestionID) REFERENCES Questions_Details(QuestionID) On Delete Cascade);
+
+
+INSERT INTO Student_Responses VALUES(201,1,101,'A',1);
+INSERT INTO Student_Responses VALUES(202,1,102,'A',1);
+INSERT INTO Student_Responses VALUES(203,1,103,'B',0);
+INSERT INTO Student_Responses VALUES(204,1,104,'B',1);
+INSERT INTO Student_Responses VALUES(205,1,105,'C',1);
+
+INSERT INTO Student_Responses VALUES(206,2,101,'A',1);
+INSERT INTO Student_Responses VALUES(207,2,102,'A',1);
+INSERT INTO Student_Responses VALUES(208,2,103,'C',0);
+INSERT INTO Student_Responses VALUES(209,2,104,'A',0);
+INSERT INTO Student_Responses VALUES(210,2,105,'D',0);
+
+INSERT INTO Student_Responses VALUES(211,3,111,'C',1);
+INSERT INTO Student_Responses VALUES(212,3,112,'A',1);
+INSERT INTO Student_Responses VALUES(213,3,113,'B',1);
+INSERT INTO Student_Responses VALUES(214,3,114,'A',0);
+INSERT INTO Student_Responses VALUES(215,3,115,'D',1);
+
+INSERT INTO Student_Responses VALUES(216,2,111,'D',0);
+INSERT INTO Student_Responses VALUES(217,2,112,'C',1);
+INSERT INTO Student_Responses VALUES(218,2,113,'A',1);
+INSERT INTO Student_Responses VALUES(219,2,114,'B',1);
+INSERT INTO Student_Responses VALUES(220,2,115,'A',0);
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE Report_Card(
+ ReportID NUMBER(6) NOT NULL,
+ UserID NUMBER(6) NOT NULL,
+ ExamID NUMBER(6) NOT NULL,
+ Marks NUMBER(3) NOT NULL,
+ Status VARCHAR2(5) NOT NULL,
+ Exam_Date DATE NOT NULL,
+ CONSTRAINT REPORTCARD_ReportID_PK PRIMARY KEY (ReportID),
+ CONSTRAINT REPORTCARD_UserID_FK FOREIGN KEY (UserID) REFERENCES User_Details(UserID) On Delete Cascade,
+ CONSTRAINT REPORTCARD_ExamID_FK FOREIGN KEY (ExamID) REFERENCES Exam_Details(ExamID) On Delete Cascade);
+
+
+
+INSERT INTO Report_Card VALUES(301,1,51,4,'PASS','01-01-2021');
+INSERT INTO Report_Card VALUES(302,2,52,2,'FAIL','02-01-2021');
+INSERT INTO Report_Card VALUES(303,3,53,4,'PASS','03-01-2021');
+
